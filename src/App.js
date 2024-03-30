@@ -1,15 +1,15 @@
-import CartForm from "./components/CarForm";
-import CartList from "./components/CarList";
-import CartSearch from "./components/CarSearch";
-import CartValue from "./components/CarValue";
+import CarForm from "./components/CarForm";
+import CarList from "./components/CarList";
+import CarSearch from "./components/CarSearch";
+import CarValue from "./components/CarValue";
 
 function App() {
   return (
-    <div>
-      <CartForm />
-      <CartList />
-      <CartSearch />
-      <CartValue />
+    <div className="container is-fluid">
+      <CarForm />
+      <CarSearch />
+      <CarList />
+      <CarValue />
     </div>
   );
 }

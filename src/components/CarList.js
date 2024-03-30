@@ -1,5 +1,52 @@
+// Importing necessary dependencies from react-redux and store/slices/carsSlice
+import { useDispatch, useSelector } from "react-redux"; // Importing useDispatch and useSelector hooks from react-redux
+import { removeCar } from "../store/slices/carsSlice"; // Importing removeCar action creator from carsSlice
+
+// Function component representing the CarList
 function CarList() {
-  return <div>CarList</div>;
+  // Using useDispatch hook to dispatch actions
+  const dispatch = useDispatch();
+
+  // Using useSelector hook to access selected state from the Redux store
+  const cars = useSelector((state) => {
+    return state.cars.data; // Getting list of cars from the Redux store
+  });
+
+  // Event handler for deleting a car
+  const handleCarDelete = (car) => {
+    // Dispatching removeCar action with the id of the car to be deleted
+    dispatch(removeCar(car.id));
+  };
+
+  // Mapping through the list of cars and rendering each car
+  const renderedCars = cars.map((car) => {
+    return (
+      <div key={car.id} className="panel">
+        {/* Displaying car name and cost */}
+        <p>
+          {car.name} - ${car.cost}
+        </p>
+        {/* Button to delete the car */}
+        <button
+          className="button is-danger"
+          onClick={() => handleCarDelete(car)}
+        >
+          Delete
+        </button>
+      </div>
+    );
+  });
+
+  // Rendering the CarList component
+  return (
+    <div className="car-list">
+      {/* Rendering list of cars */}
+      {renderedCars}
+      {/* Horizontal line */}
+      <hr />
+    </div>
+  );
 }
 
+// Exporting CarList component as default
 export default CarList;

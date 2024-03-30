@@ -1,5 +1,5 @@
-function CarValu() {
-  return <div>CarValu</div>;
+function CarValue() {
+  return <div>CarValue</div>;
 }
 
-export default CarValu;
+export default CarValue;
