@@ -7,9 +7,17 @@ function CarList() {
   // Using useDispatch hook to dispatch actions
   const dispatch = useDispatch();
 
-  // Using useSelector hook to access selected state from the Redux store
-  const cars = useSelector((state) => {
-    return state.cars.data; // Getting list of cars from the Redux store
+  // Destructuring 'cars', 'name', 'data', and 'searchTerm' from the Redux store state
+  const { cars, name } = useSelector(({ form, cars: { data, searchTerm } }) => {
+    // Filtering the cars based on the search term
+    const filteredCars = data.filter((car) =>
+      car.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ); // Getting list of cars from the Redux store
+
+    return {
+      cars: filteredCars,
+      name: form.name,
+    };
   });
 
   // Event handler for deleting a car
@@ -20,8 +28,11 @@ function CarList() {
 
   // Mapping through the list of cars and rendering each car
   const renderedCars = cars.map((car) => {
+    // Determining if the car name should be bold
+    const bold = name && car.name.toLowerCase().includes(name.toLowerCase());
+
     return (
-      <div key={car.id} className="panel">
+      <div key={car.id} className={`panel ${bold ? "bold" : ""}`}>
         {/* Displaying car name and cost */}
         <p>
           {car.name} - ${car.cost}

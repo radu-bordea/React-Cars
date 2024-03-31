@@ -1,11 +1,12 @@
 // Importing necessary dependency from @reduxjs/toolkit
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { addCar } from "./carsSlice";
 
 // Creating a slice for managing form state
 const formSlice = createSlice({
-  name: 'form', // Name of the slice
+  name: "form", // Name of the slice
   initialState: {
-    name: '', // Initial value for name
+    name: "", // Initial value for name
     cost: 0, // Initial value for cost
   },
   reducers: {
@@ -17,6 +18,12 @@ const formSlice = createSlice({
     changeCost(state, action) {
       state.cost = action.payload; // Updating the cost in the form state
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(addCar, (state, action)=> {
+      state.name = '';
+      state.cost = 0;
+    });
   },
 });
 
